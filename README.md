@@ -183,5 +183,9 @@ ansible all -m ping
 - `ansible all -a "free -m"` # To find out the memory
 - `ansible all --module-name copy --args "src=/tmp/foo.txt dest=/tmp/foo.txt"` # to copy the file from controller to remote servers
 
-## What is inventory
-- 
+## What is inventory ?
+- The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. The file can be in one of many formats depending on your Ansible environment and plugins. Common formats include INI and YAML.
+
+## What is Ansible roles ?
+- Ansible role is a set of tasks to configure a host to serve a certain purpose like configuring a service. Roles are defined using YAML files with a predefined directory structure. A role directory structure contains directories: defaults, vars, tasks, files, templates, meta, handlers.
+
