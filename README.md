@@ -27,3 +27,87 @@
 - Ansible uses small programs known as Ansible Modules in order to orchestrate nodes. These modules are the resource models of the chosen system state executed over SSH. We do not need any agents and extra custom security infrastructure for this purpose.
 - The library of modules can exist in any machine. The modules perform tasks using JSON protocol over the standard output and write the convenient code in any programming language, including Python.
 - The system utilizes YAML in Ansible playbooks format in order to describe the work for Automation. This way, it is the machine as well as human-friendly. And when the nodes are not being managed by Ansible, it doesn't consume resources since neither programs nor daemons are running in the background..
+
+### Set up three Virtual machines (Ansible Controller, Web app and Db machines) using Vagrant file.
+```
+
+# -*- mode: ruby -*-
+ # vi: set ft=ruby :
+ 
+ # All Vagrant configuration is done below. The "2" in Vagrant.configure
+ # configures the configuration version (we support older styles for
+ # backwards compatibility). Please don't change it unless you know what
+ 
+ # MULTI SERVER/VMs environment 
+ #
+ Vagrant.configure("2") do |config|
+    # creating are Ansible controller
+      config.vm.define "controller" do |controller|
+        
+       controller.vm.box = "bento/ubuntu-18.04"
+       
+       controller.vm.hostname = 'controller'
+       
+       controller.vm.network :private_network, ip: "192.168.33.12"
+       
+       # config.hostsupdater.aliases = ["development.controller"] 
+       
+      end 
+    # creating first VM called web  
+      config.vm.define "web" do |web|
+        
+        web.vm.box = "bento/ubuntu-18.04"
+       # downloading ubuntu 18.04 image
+    
+        web.vm.hostname = 'web'
+        # assigning host name to the VM
+        
+        web.vm.network :private_network, ip: "192.168.33.10"
+        #   assigning private IP
+        
+        #config.hostsupdater.aliases = ["development.web"]
+        # creating a link called development.web so we can access web page with this link instread of an IP   
+            
+      end
+      
+    # creating second VM called db
+      config.vm.define "db" do |db|
+        
+        db.vm.box = "bento/ubuntu-18.04"
+        
+        db.vm.hostname = 'db'
+        
+        db.vm.network :private_network, ip: "192.168.33.11"
+        
+        #config.hostsupdater.aliases = ["development.db"]     
+      end
+    
+    
+    end
+```
+- Go inside the folder where the vagrant file is present do `vagrant up`
+- Go inside each virtual machine 
+- `vagrant ssh controller`
+   `vagrant ssh web`
+   `vagrant ssh db`
+
+- And do `sudo apt-get update` and `sudo apt-get upgrade -y`
+- After updating and upgrading all the three virtual machines,go inside the controller and give following commands
+### Commands to set up controller
+ ```
+ vagrant ssh controller
+
+sudo apt-get update
+  
+sudo apt-get install software-properties-common
+  
+sudo apt-add-repository ppa:ansible/ansible
+  
+sudo apt-get update
+  
+sudo apt-get install ansible
+
+cd /etc/ansible
+ ```
+ - Check the version of ansible `ansible --version`
+ - 
