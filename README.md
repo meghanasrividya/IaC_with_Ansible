@@ -1,6 +1,11 @@
 # IaC_with_Ansible
 ![image](https://user-images.githubusercontent.com/97250268/201668955-ebfa816e-04ae-48ee-81ed-898e53150920.png)
 
+# Ansible default folder / file structure
+- /etc/ansible/hosts
+- name + ip of our agent nodes
+
+
 # What is Iac?
 
 - Infrastructure as code is the process of managing and provisioning computer data centers through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools.
