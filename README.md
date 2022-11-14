@@ -165,15 +165,10 @@ ansible --version
 sudo apt-get install tree
 
 cd /etc/ansible
-sudo nano hosts
-```hosts
-[web]
-192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-[db]
-192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-
-
-ansible all -m ping
+echo [web] >> hosts
+echo 192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant >> hosts
+echo [db] >> hosts
+echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant >> hosts
 
 
 ```
