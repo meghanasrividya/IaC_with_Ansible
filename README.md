@@ -176,7 +176,7 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 ## Ansible Adhoc Commands
 - `ansible all -a "uname -a"` # To determine the name of the remote server
 - `ansible all -a "free -m"` # To find out the memory
-- `ansible all --module-name copy --args "src=/tmp/foo.txt dest=/tmp/foo.txt"` # to copy the file from controller to remote servers
+- `sudo ansible web -m copy -a "src=hosts dest=/home/vagrant"` # to copy the file from controller to remote servers
 
 ## What is inventory ?
 - The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. The file can be in one of many formats depending on your Ansible environment and plugins. Common formats include INI and YAML.
