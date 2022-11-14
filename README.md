@@ -110,4 +110,40 @@ sudo apt-get install ansible
 cd /etc/ansible
  ```
  - Check the version of ansible `ansible --version`
+
+ ## SSH into web and db from the controller
+ ```
+ vagrant@controller:/etc/ansible$ ssh vagrant@192.168.33.10
+enter 'yes' & password: vagrant
+logout of web
+vagrant@controller:/etc/ansible$ ssh vagrant@192.168.33.11
+enter 'yes' & password: vagrant
+logout of db
+ ```
+ ## Setting up the connections with Db and Web App
+ 
+ - To connect to the Db and Web server we need to go inside the hosts file in controller and change the configuration
+ - IP addresss of Web App is `192.168.33.10`
+ - IP address of the Db VM is `192.168.33.11`
+ - Go inside the hosts file `sudo nano hosts` and change configuration.
+ ```
+ [web]
+192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[db]
+192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+ ```
  - 
+## To check whether the connection has been successfully established
+```
+ping 192.168.33.10
+ping 192.168.33.11
+#all the servers
+sudo ansible all -m ping
+# or separately each server
+sudo ansible web -m ping
+sudo ansible app -m ping
+```
+## Ansible Adhoc Commands
+
