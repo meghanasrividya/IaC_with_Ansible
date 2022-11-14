@@ -171,7 +171,7 @@ sudo nano hosts
 192.168.33.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
 [db]
 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-```
+
 
 ansible all -m ping
 
