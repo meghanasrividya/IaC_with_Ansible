@@ -179,4 +179,7 @@ ansible all -m ping
 ```
 
 ## Ansible Adhoc Commands
+- `ansible all -a "uname -a"` # To determine the name of the remote server
+- `ansible all -a "free -m"` # To find out the memory
+- `ansible all --module-name copy --args "src=/tmp/foo.txt dest=/tmp/foo.txt"` # to copy the file from controller to remote servers
 
