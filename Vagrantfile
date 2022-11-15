@@ -17,6 +17,11 @@
        
        controller.vm.network :private_network, ip: "192.168.33.12"
        
+       controller.vm.provision "shell" , path:"provision.sh"
+
+       controller.vm.synced_folder "./app", "/home/vagrant/app", create: true
+
+       controller.vm.synced_folder "./environment", "/home/vagrant/environment", create: true
        # config.hostsupdater.aliases = ["development.controller"] 
        
       end 
@@ -31,7 +36,7 @@
         
         web.vm.network :private_network, ip: "192.168.33.10"
         #   assigning private IP
-        
+        web.vm.provision "shell" , path:"provision1.sh"
         #config.hostsupdater.aliases = ["development.web"]
         # creating a link called development.web so we can access web page with this link instread of an IP   
             
@@ -46,6 +51,7 @@
         
         db.vm.network :private_network, ip: "192.168.33.11"
         
+        db.vm.provision "shell" , path:"provision1.sh"
         #config.hostsupdater.aliases = ["development.db"]     
       end
     
