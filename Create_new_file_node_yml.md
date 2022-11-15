@@ -79,4 +79,5 @@
  - To check the syntax of the node.yml give the command `sudo ansible-playbook node.yml --syntax-check`
  - If the syntax is ok.it will display `playbook: node.yml`
  - To run the playbook ,give the command `sudo ansible-playbook node.yml`
-   
+ - Once the node.js successfully installed ,check the version of the node.js from the controllerusing command
+ - `sudo ansible web -a "node --version"`
