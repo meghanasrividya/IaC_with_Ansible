@@ -9,9 +9,9 @@
       url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
       state: present
 
-  - name: "Add nodejs 12.x ppa for apt repo"
+  - name: "Add nodejs 14.x ppa for apt repo"
     apt_repository:
-      repo: deb https://deb.nodesource.com/node_12.x bionic main
+      repo: deb https://deb.nodesource.com/node_14.x bionic main
       update_cache: yes
 
   - name: Install/configure nodejs
@@ -32,19 +32,28 @@
       src: /home/vagrant/environment
       dest: /home/vagrant
 
-  - name: Add Env varible
+ # - name: Add Env varible
+  #  shell: |
+   #   echo export DB_HOST=mongodb://192.168.33.11:27017/posts >> .bashrc
+    #  sudo source .bashrc
+  - name: mongoose & latest npm
     shell: |
-      echo export DB_HOST=mongodb://192.168.33.11:27017/posts >> .bashrc
-      sudo source .bashrc
+      npm install -g npm@latest
+      npm install mongoose -y
+      
+
+
+
+
   - name: Run npm
     shell: |
       cd app
       npm install
       pm2 kill
       pm2 start app.js
-  - name: Seed Database
-    shell: |
-      cd app
-      node seeds/seed.js
+    environment:
+      DB_HOST: mongodb://192.168.33.11:27017/posts?authSource=admin
+    become_user: root          
+      
 
 

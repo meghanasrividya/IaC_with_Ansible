@@ -39,7 +39,7 @@
         web.vm.provision "shell" , path:"provision1.sh"
 
     
-        web.vm.synced_folder "./folder_web", "/home/vagrant/local/", create: true
+         # web.vm.synced_folder "./folder_web", "/home/vagrant/local/", create: true
 
 
         #config.hostsupdater.aliases = ["development.web"]
