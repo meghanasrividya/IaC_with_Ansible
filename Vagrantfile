@@ -37,6 +37,11 @@
         web.vm.network :private_network, ip: "192.168.33.10"
         #   assigning private IP
         web.vm.provision "shell" , path:"provision1.sh"
+
+    
+        web.vm.synced_folder "./folder_web", "/home/vagrant/local/", create: true
+
+
         #config.hostsupdater.aliases = ["development.web"]
         # creating a link called development.web so we can access web page with this link instread of an IP   
             

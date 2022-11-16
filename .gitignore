@@ -1,0 +1,2 @@
+.vagrant/
+environment/ansible/group_vars/
