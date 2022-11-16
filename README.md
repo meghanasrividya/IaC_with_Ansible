@@ -184,3 +184,6 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 ## What is Ansible roles ?
 - Ansible role is a set of tasks to configure a host to serve a certain purpose like configuring a service. Roles are defined using YAML files with a predefined directory structure. A role directory structure contains directories: defaults, vars, tasks, files, templates, meta, handlers.
 
+## Tree Structure of ansible
+![image](https://user-images.githubusercontent.com/97250268/202213620-baeaf353-2292-435b-9973-9c20789792dd.png)
+
