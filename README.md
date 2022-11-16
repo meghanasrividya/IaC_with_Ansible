@@ -192,3 +192,5 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 - Create `pass.yml` with `ansible-vault create pass.yml`
 - Copy `aws_access_key` and `aws_secret_key` and save (click i to insert and to save click esc and :wq! and click enter)
 - Change the permissions using `sudo chmod 666 pass.yml`.
+#### Command to create EC2 instance
+- `sudo ansible-playbook create_ec2.yml --ask-vault-pass --tags create-ec2`
