@@ -187,3 +187,8 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 ## Tree Structure of ansible
 ![image](https://user-images.githubusercontent.com/97250268/202213620-baeaf353-2292-435b-9973-9c20789792dd.png)
 
+## Steps for setting up ansible vault
+- Go into `/etc/ansible` create a directory `mkdir /groups_vars/all`
+- Create `pass.yml` with `ansible-vault create pass.yml`
+- Copy `aws_access_key` and `aws_secret_key` and save (click i to insert and to save click esc and :wq! and click enter)
+- Change the permissions using `sudo chmod 666 pass.yml`
