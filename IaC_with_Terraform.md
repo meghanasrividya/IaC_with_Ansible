@@ -17,6 +17,13 @@
  - Reusable configurations.
  - Managed state.
  - Easy rollsbacks.
+
+### Usecases:
+- Build and Dispose Environments
+- N-Tier Application Deployments
+- Using Multiple Clouds
+- Working with Most Popular PaaS Tools
+
  ### Terraform Commands
  ```
  Usage: terraform [global options] <subcommand> [args]
