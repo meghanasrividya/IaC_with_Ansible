@@ -198,7 +198,7 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 ## Infrastructure as Code - Orchestration with Terraform
 
 ### What is Terraform ?
--Terraform is an open-source, infrastructure as code, software tool created by HashiCorp.
+- Terraform is an open-source, infrastructure as code, software tool created by HashiCorp.
 
 - Terraform can be defined as a tool for versioning, changing, and building infrastructure efficiently and safely. It can manage popular and existing service providers and custom in-house solutions also.
 
