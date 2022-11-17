@@ -224,9 +224,9 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 ![image](https://user-images.githubusercontent.com/97250268/202476635-5bd0efca-80da-49b9-8e72-bf7aa7846cb1.png)
 
 
-Steps:
-1.Attach VPC to IG
-2.Associate the route table to the subnet 
+#### Steps:
+- Attach VPC to IG
+- Associate the route table to the subnet 
 
 
  
