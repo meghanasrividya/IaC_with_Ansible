@@ -215,9 +215,8 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
  - Managed state.
  - Easy rollsbacks.
  
- ### Use cases:
  
- #### Terraform Architecture:
+ ## Terraform Architecture:
 
 ![image](https://user-images.githubusercontent.com/97250268/202471468-1c1c1bb1-2c1d-4c76-a506-71744d957ab4.png)
 
