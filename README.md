@@ -194,3 +194,27 @@ echo 192.168.33.11 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_p
 - Change the permissions using `sudo chmod 666 pass.yml`.
 #### Command to create EC2 instance
 - `sudo ansible-playbook create_ec2.yml --ask-vault-pass --tags create-ec2`
+
+## Infrastructure as Code - Orchestration with Terraform
+
+### What is Terraform ?
+-Terraform is an open-source, infrastructure as code, software tool created by HashiCorp.
+
+- Terraform can be defined as a tool for versioning, changing, and building infrastructure efficiently and safely. It can manage popular and existing service providers and custom in-house solutions also.
+
+- Configuration files explain to terraform that the elements required executing our entire data center or an individual application. Terraform produces a single execution plan explaining what it'll do for reaching the desired state after it runs for building the desired infrastructure. Terraform is capable of determining what will change and build execution plans that can be used as the configuration modifications.
+
+- The infrastructure terraform could handle low-level elements like networking, storage, compute instances, also high-level elements like SaaS features, DNS entries, etc.
+
+- Terraform can provide support with multi-cloud via having a single workflow for every cloud. Various manages of terraform infrastructure could be hosted over Google Cloud Platform, Microsoft Azure, and Amazon Web Services, or on-prem within the private clouds like CloudStack, OpenStack, or VMWare vSphere. Terraform considers IaC (Infrastructure as Code). So, we need not to be worried about our infrastructure drifting away through the desired configuration.
+ 
+ ### Benefits :
+ - Declarative nature.
+ - Platform agnostics.
+ - Reusable configurations.
+ - Managed state.
+ - Easy rollsbacks.
+ 
+ ### Use cases:
+ 
+ - 
