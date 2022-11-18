@@ -17,3 +17,27 @@
 - This state is stored by default in a local file named terraform.tfstate
 
 - Terraform uses this local state to create plans and make changes to our infrastructure. Before any terraform operation, Terraform does a refresh to update the state with the real infrastructure.
+
+### Code to create Autoscaling group
+```
+resource "aws_launch_template" "lt_app" {
+  name_prefix   = "eng130_meghana_lt"
+  image_id      = var.webapp_ami_id
+  instance_type = var.ec2_type
+}
+
+resource "aws_autoscaling_group" "lt_asg" {
+  availability_zones = ["eu-west-1a","eu-west-1b","eu-west-1c"]
+  desired_capacity   = 2
+  max_size           = 3
+  min_size           = 2
+
+  launch_template {
+    id      = aws_launch_template.lt_app.id
+    version = "$Latest"
+
+
+  }
+
+```
+
