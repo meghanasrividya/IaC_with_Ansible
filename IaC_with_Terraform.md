@@ -86,6 +86,8 @@ Global options (use these before the subcommand, if any):
 #### main.tf code
 
 ```
+
+
 # write a script to launch resources on cloud
 
 #create ec2 instance on AWS
@@ -104,14 +106,6 @@ region = "eu-west-1"
 
  }
 # what type os server with what sort of functionality
-resource "aws_instance" "app_instance" {
-   ami = var.webapp_ami_id
-   instance_type =var.ec2_type
-   associate_public_ip_address = true
-   tags = {
-    Name ="eng130-meghana-terraform-app1"
- }
-}
 # add resource vpc
 resource "aws_vpc" "mainvpc" {
      cidr_block = var.cidr_vpc
@@ -119,9 +113,10 @@ resource "aws_vpc" "mainvpc" {
       Name ="eng130-meghana4-vpc"
      }
 }
+
 # add resource internet gateway
 resource "aws_internet_gateway" "ig" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.mainvpc.id
 
   tags = {
     Name = "eng130_meghana_terraform_internetgateway"
@@ -130,7 +125,7 @@ resource "aws_internet_gateway" "ig" {
 
 #add resource subnet
 resource "aws_subnet" "main" {
-  vpc_id     = var.vpc_id
+  vpc_id     = aws_vpc.mainvpc.id
   cidr_block = var.cidr_subnet_public
 
   tags = {
@@ -139,11 +134,11 @@ resource "aws_subnet" "main" {
 }
 # add resource route table
 resource "aws_route_table" "example" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.mainvpc.id
 
   route {
     cidr_block = var.all
-    gateway_id = var.igw_id
+    gateway_id = aws_internet_gateway.ig.id
   }
   tags = {
      
@@ -153,15 +148,15 @@ resource "aws_route_table" "example" {
 }
 # associating route table to subnet
 resource "aws_route_table_association" "a" {
-  subnet_id      = var.subnet_id
-  route_table_id = var.subnet_id
+  subnet_id      = aws_subnet.main.id
+  route_table_id = aws_route_table.example.id
 }
 
 
   # Create Security Group for instance
-  resource "aws_security_group" "eng130-meghana-terraform-sg" {
+  resource "aws_security_group" "sg" {
     name   = "eng130-meghana-terraform-sg"
-    vpc_id = var.vpc_id
+    vpc_id = aws_vpc.mainvpc.id
     # Inbound Rules
 
     # SSH from anywhere
@@ -195,12 +190,20 @@ resource "aws_route_table_association" "a" {
 
   }
 # instance type
+resource "aws_instance" "app_instance" {
+   ami = var.webapp_ami_id
+   instance_type =var.ec2_type
+   associate_public_ip_address = true
+subnet_id = aws_subnet.main.id
+   key_name=var.aws_key_name   
+vpc_security_group_ids = [aws_security_group.sg.id]
+  
+  
 
-
-# do we need public ip or not
-
-# name of the server
-
+   tags = {
+    Name ="eng130-meghana-terraform-app1"
+ }
+}
 
 
 
