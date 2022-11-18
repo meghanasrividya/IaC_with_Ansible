@@ -8,6 +8,6 @@
 - First with the help of Terraform `main.tf`launch the EC2 instances in the AWS cloud.
 - Install the ansible  in one of the EC2 instance which acts as ansible controller
 - From the controller install the node app in web EC2 instance using `node.yml` file
-- From the controller install the mongodb  in web EC2 instance using `mongo.yml` file
+- From the controller install the mongodb  in mongodb EC2 instance using `mongo.yml` file
 
 
