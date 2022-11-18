@@ -45,3 +45,51 @@ resource "aws_autoscaling_group" "lt_asg" {
 
 ```
 
+### Code to Create Cloud Metrics
+```
+resource "aws_cloudwatch_metric_alarm" "tf-cpu-alarm-up" {
+    alarm_name = eng130-meghana-alarm
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods = "2"
+    metric_name = "CUPUtilization"
+    namespace = "AWS/EC2"
+    period = "120"
+    statistic = "Average"
+    threshold = "70"
+
+    dimensions = {
+        AutoScalingGroupName = "${aws_autoscaling_group.tf-auto-scaling-group.name}"
+    }
+
+    alarm_description = "This metric monitor EC2 instance CPU utilization"
+    alarm_actions = ["${aws_autoscaling_policy.tf-autoscaling-up.arn}"]
+}
+
+# Create Auto Scaling Policy - Decreased Usage
+resource "aws_autoscaling_policy" "tf-autoscaling-down"{
+    name = `eng130-asg`
+    scaling_adjustment = -1
+    adjustment_type = "ChangeInCapacity"
+    cooldown = 300
+    autoscaling_group_name = "${aws_autoscaling_group.tf-auto-scaling-group.name}"
+}
+
+resource "aws_cloudwatch_metric_alarm" "tf-cpu-alarm-down" {
+    alarm_name = var.cpu_alarm_down
+    comparison_operator = "LessThanOrEqualToThreshold"
+    evaluation_periods = "2"
+    metric_name = "CUPUtilization"
+    namespace = "AWS/EC2"
+    period = "120"
+    statistic = "Average"
+    threshold = "30"
+
+    dimensions = {
+        AutoScalingGroupName = "${aws_autoscaling_group.tf-auto-scaling-group.name}"
+    }
+
+    alarm_description = "This metric monitor EC2 instance CPU utilization"
+    alarm_actions = ["${aws_autoscaling_policy.tf-autoscaling-down.arn}"]
+}
+
+```
