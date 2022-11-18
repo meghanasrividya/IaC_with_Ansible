@@ -75,7 +75,7 @@ resource "aws_autoscaling_policy" "tf-autoscaling-down"{
 }
 
 resource "aws_cloudwatch_metric_alarm" "tf-cpu-alarm-down" {
-    alarm_name = var.cpu_alarm_down
+    alarm_name = eng130-meghana-alarm
     comparison_operator = "LessThanOrEqualToThreshold"
     evaluation_periods = "2"
     metric_name = "CUPUtilization"
