@@ -20,13 +20,16 @@
 
 ### Code to create Autoscaling group
 ```
+# To create launch template
 resource "aws_launch_template" "lt_app" {
-  name_prefix   = "eng130_meghana_lt"
+   name="eng130-meghana-lt"
+
   image_id      = var.webapp_ami_id
   instance_type = var.ec2_type
 }
-
+# To create autoscaling group
 resource "aws_autoscaling_group" "lt_asg" {
+   name="eng130_meghana_asg"
   availability_zones = ["eu-west-1a","eu-west-1b","eu-west-1c"]
   desired_capacity   = 2
   max_size           = 3
@@ -38,6 +41,7 @@ resource "aws_autoscaling_group" "lt_asg" {
 
 
   }
+}
 
 ```
 
