@@ -93,3 +93,160 @@ resource "aws_cloudwatch_metric_alarm" "tf-cpu-alarm-down" {
 }
 
 ```
+### main.tf code to install 3 EC2 instances :
+
+```
+
+
+# write a script to launch resources on cloud
+
+#create ec2 instance on AWS
+# syntax  {
+       #  ami= sadada }
+# download dependencies from AWS
+
+provider "aws" {
+
+
+   
+
+
+# which part of AWS we would like to launch resources in
+region = "eu-west-1"
+
+ }
+# what type os server with what sort of functionality
+# add resource vpc
+resource "aws_vpc" "mainvpc" {
+     cidr_block = var.cidr_vpc
+     tags = {
+      Name ="eng130-meghana4-vpc"
+     }
+}
+
+# add resource internet gateway
+resource "aws_internet_gateway" "ig" {
+  vpc_id = aws_vpc.mainvpc.id
+
+  tags = {
+    Name = "eng130_meghana_terraform_internetgateway"
+  }
+}
+
+#add resource subnet
+resource "aws_subnet" "main" {
+  vpc_id     = aws_vpc.mainvpc.id
+  cidr_block = var.cidr_subnet_public
+
+  tags = {
+    Name = "eng130_meghana_terraform_subnet_public"
+  }
+}
+# add resource route table
+resource "aws_route_table" "example" {
+  vpc_id = aws_vpc.mainvpc.id
+
+  route {
+    cidr_block = var.all
+    gateway_id = aws_internet_gateway.ig.id
+  }
+  tags = {
+     
+    Name ="eng130_meghana_terraform_rt_public"
+
+}
+}
+# associating route table to subnet
+resource "aws_route_table_association" "a" {
+  subnet_id      = aws_subnet.main.id
+  route_table_id = aws_route_table.example.id
+}
+
+
+  # Create Security Group for instance
+  resource "aws_security_group" "sg" {
+    name   = "eng130-meghana-terraform-sg"
+    vpc_id = aws_vpc.mainvpc.id
+    # Inbound Rules
+
+    # SSH from anywhere
+    ingress {
+      description = "SSH"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    # HTTP from anywhere
+    ingress {
+      description = "HTTP"
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+      description = "All Outbound Traffic"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+      Name = "eng130-meghana-terraform-sg"
+    }
+
+  }
+# instance type
+resource "aws_instance" "web_app_instance" {
+   ami = var.webapp_ami_id
+   instance_type =var.ec2_type
+   associate_public_ip_address = true
+subnet_id = aws_subnet.main.id
+   key_name=var.aws_key_name   
+vpc_security_group_ids = [aws_security_group.sg.id]
+  
+  
+
+   tags = {
+    Name ="eng130-meghana-terraform-app1"
+ }
+}
+
+
+
+
+# To create an autoscaling policy
+# Create Auto Scaling Policy - Increased Usage
+resource "aws_instance" "ansible_controller" {
+
+   ami =var.ansible_ami_id
+   instance_type=var.ec2_type
+   associate_public_ip_address =true
+   subnet_id=aws_subnet.main.id
+   key_name=var.aws_key_name
+   security_groups =[aws_security_group.sg.id]
+    
+   tags = {
+    Name= "eng130-meghana-ansible"}
+
+}
+
+
+resource "aws_instance" "db_instance"{
+     ami =var.webapp_ami_id
+     instance_type=var.ec2_type
+     associate_public_ip_address =true
+     subnet_id=aws_subnet.main.id
+     key_name=var.aws_key_name
+     security_groups =[aws_security_group.sg.id]
+
+  tags ={
+      Name ="eng130-meghana-dbapp"
+}
+
+}
+
+```
