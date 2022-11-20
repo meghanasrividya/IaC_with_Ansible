@@ -93,7 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "tf-cpu-alarm-down" {
 }
 
 ```
-### main.tf code to install 3 EC2 instances :
+### main.tf code to install 3 EC2 instances (web,db,ansible controller) :
 
 ```
 
